@@ -2,9 +2,8 @@ body{
   background-color: #EAEAEA;
 }
 
-.App{
+nav{
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 1.5rem;
@@ -12,13 +11,16 @@ body{
 
 
 .addTask{
+  display: flex;
+  justify-content: space-around;
   font-size: 1.5rem;
-  border: 1px solid #bcbcbc;
-  background-color: rgb(79, 79, 241);
   box-shadow: inset;
   color: white;
   padding: 5px;
+  width: 80%;
 }
+
+
 
 .addTask span{
   margin-left: 5px ;
@@ -40,4 +42,24 @@ body{
 .mb-3 #date{
   padding: 0.2rem;
   border-radius: 10px;
+}
+
+.list-section{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin: 1rem 4rem 0 4rem;
+  justify-content: center;
+}
+
+.list-section h1{
+  text-align: center;
+}
+
+.btn-margin{
+  margin-right: 0.6rem ;
+}
+
+.list-group-item{
+  background-color: #f1f1f1
 }

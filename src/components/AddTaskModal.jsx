@@ -1,32 +1,55 @@
 import { useState } from 'react';
 
 function AddTaskModal(props) {
-  
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState(new Date().toJSON().slice(0, 10));
+
+  const onDateChange = (e)=>{
+    const newDate = new Date(e.target.value).toJSON().slice(0, 10);
+    setDate(newDate);
+    console.log(newDate);
+  }
+
+  const onAddTaskHandler = ()=>{
+    const item = {
+      title: title,
+      description : description,
+      date: date
+    }
+    props.setTasks([...props.tasks, item]);
+    props.onAddHandler()
+  }
+
+  const onDelete = ()=>{
+    
+  }
+
   return (
     <div className="textModal">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Modal title</h5>
+            <h5 className="modal-title">Add Todo</h5>
             <button type="button" className="btn-close" onClick={()=> props.onAddHandler()}></button>
           </div>
           <div className="modal-body">
             <div className="mb-3">
               <label for="exampleFormControlInput1" className="form-label">Title</label>
-              <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Enter your title" />
+              <input type="text" className="form-control" onChange={(e)=> setTitle(e.target.value)} value={title} id="exampleFormControlInput1" placeholder="Enter your title" />
             </div>
             <div className="mb-3">
               <label for="exampleFormControlTextarea1" className="form-label">Description</label>
-              <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea className="form-control" onChange={(e)=> setDescription(e.target.value)} value={description} id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <div className="mb-3">
               <label for="date" className="form-label date">Date: </label>
-              <input type={'date'} id='date'   />
+              <input type='date' id='date'  value={date} onChange={(e)=> onDateChange(e)}  />
             </div>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={()=> props.onAddHandler()}>Close</button>
-            <button type="button" className="btn btn-primary">Save changes</button>
+            <button type="button" className="btn btn-primary" onClick={onAddTaskHandler}>Add Task</button>
           </div>
         </div>
       </div>

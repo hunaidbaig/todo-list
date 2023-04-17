@@ -1,24 +1,61 @@
 import { useState } from 'react';
 import './App.css';
 import AddTaskModal from './components/AddTaskModal';
+import TodoList from './components/TodoList';
 
 function App() {
-  const [add, setAdd] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [tasks, setTasks] = useState([
+    {
+      title: 'This is my title',
+      description: 'I have to do this in the morning',
+      date : Date()
+    },
+    {
+      title: 'This is my title',
+      description: 'I have to do this in the morning',
+      date : Date()
+    },
+    {
+      title: 'This is my title',
+      description: 'I have to do this in the morning',
+      date : Date()
+    }
+    
+  ]);
+
 
   const onAddHandler =() =>{
-    setAdd(!add);
-    console.log('hello');
-    console.log(add);
+    setToggle(!toggle);
   }
 
   return (
     <div className="App">
-      <div className='addTask' onClick={onAddHandler}>
-        <i className="fa-solid fa-circle-plus"></i>
-        <span >Add Task</span>
-      </div>
+      <nav className='border-bottom'>
+        <h1>Todo List</h1>
+        <div className='addTask' >
+          <div className='left-nav btn btn-outline-success' onClick={onAddHandler}>
+            <i className="fa-solid fa-circle-plus"></i>
+            <span >Add Task</span>
+          </div>
+          <div className='right-nav'>
+            <form className="d-flex">
+              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+              <button className="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <main className='list-section'>
+        <h1>Today's Task List</h1>
         {
-          add ? <AddTaskModal onAddHandler={onAddHandler}  /> : null
+          tasks.map(task=>(
+            <TodoList title={task.title} description={task.description} date={task.date} />
+          ))
+        }
+      </main>
+        {
+          toggle ? <AddTaskModal tasks={tasks} setTasks={setTasks} onAddHandler={onAddHandler}  /> : null
         }
     </div>
   );
