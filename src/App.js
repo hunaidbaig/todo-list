@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import AddTaskModal from './components/AddTaskModal';
 
 function App() {
+  const [add, setAdd] = useState(false);
+
+  const onAddHandler =() =>{
+    setAdd(!add);
+    console.log('hello');
+    console.log(add);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='addTask' onClick={onAddHandler}>
+        <i className="fa-solid fa-circle-plus"></i>
+        <span >Add Task</span>
+      </div>
+        {
+          add ? <AddTaskModal onAddHandler={onAddHandler}  /> : null
+        }
     </div>
   );
 }
