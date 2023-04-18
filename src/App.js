@@ -5,27 +5,10 @@ import TodoList from './components/TodoList';
 
 function App() {
   const [toggle, setToggle] = useState(false);
-  const [tasks, setTasks] = useState([
-    {
-      title: 'This is my title',
-      description: 'I have to do this in the morning',
-      date : Date()
-    },
-    {
-      title: 'This is my title',
-      description: 'I have to do this in the morning',
-      date : Date()
-    },
-    {
-      title: 'This is my title',
-      description: 'I have to do this in the morning',
-      date : Date()
-    }
-    
-  ]);
+  const [tasks, setTasks] = useState([]);
 
 
-  const onAddHandler =() =>{
+  const onAddHandler = () => {
     setToggle(!toggle);
   }
 
@@ -49,14 +32,23 @@ function App() {
       <main className='list-section'>
         <h1>Today's Task List</h1>
         {
-          tasks.map(task=>(
-            <TodoList title={task.title} description={task.description} date={task.date} />
+          tasks.map(task => (
+            <TodoList 
+                key={task.id}
+                id={task.id} 
+                title={task.title} 
+                description={task.description} 
+                date={task.date} 
+                tasks={tasks} 
+                setTasks={setTasks}
+                onAddHandler={onAddHandler}
+              />
           ))
         }
       </main>
-        {
-          toggle ? <AddTaskModal tasks={tasks} setTasks={setTasks} onAddHandler={onAddHandler}  /> : null
-        }
+      {
+        toggle ? <AddTaskModal tasks={tasks} setTasks={setTasks} onAddHandler={onAddHandler} /> : null
+      }
     </div>
   );
 }

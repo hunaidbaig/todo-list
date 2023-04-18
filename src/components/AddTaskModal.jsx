@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 function AddTaskModal(props) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState(props.title);
+  const [description, setDescription] = useState(props.description);
   const [date, setDate] = useState(new Date().toJSON().slice(0, 10));
 
   const onDateChange = (e)=>{
@@ -12,7 +12,9 @@ function AddTaskModal(props) {
   }
 
   const onAddTaskHandler = ()=>{
+    const id = props.tasks.length;
     const item = {
+      id: id,
       title: title,
       description : description,
       date: date
@@ -21,9 +23,7 @@ function AddTaskModal(props) {
     props.onAddHandler()
   }
 
-  const onDelete = ()=>{
-    
-  }
+ 
 
   return (
     <div className="textModal">
