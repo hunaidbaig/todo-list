@@ -5,7 +5,7 @@ function TodoList({ id, title, description, date, tasks, setTasks }) {
 
     const onDelete = () => {
         let tempList = [...tasks];
-        tempList.splice(id - 1, 1);
+        tempList.splice(id, 1);
         setTasks(tempList);
         console.log(tempList);
     }
@@ -34,13 +34,14 @@ function TodoList({ id, title, description, date, tasks, setTasks }) {
                         <button type="button" className="btn btn-outline-success" onClick={(e) => onEdit(e)}>Edit</button>
                         {editTemp ? 
                             <AddTaskModal
-                                id={2}
+                                id={id}
                                 title={title}
                                 description={description}
                                 date={date} 
                                 tasks={tasks} 
                                 setTasks={setTasks} 
-                                onAddHandler={onHandle} 
+                                onAddHandler={onHandle}
+                                editTemp= {editTemp}
                                 /> : null}
                         <button type="button" className="btn btn-outline-danger" onClick={(e) => onDelete(e)}>Delete</button>
                     </div>

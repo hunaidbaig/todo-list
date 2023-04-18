@@ -23,6 +23,24 @@ function AddTaskModal(props) {
     props.onAddHandler()
   }
 
+  const onEditTaskHandler = ()=>{
+    let arr = [...props.tasks];
+    const item = {
+      id: props.id,
+      title: title,
+      description : description,
+      date: date
+    }
+    for(let i in arr){
+      if(i === props.id){
+        arr[i] = item
+        console.log(props.tasks)
+      }
+    }
+    props.setTasks(arr);
+    props.onAddHandler()
+  }
+
  
 
   return (
@@ -49,7 +67,11 @@ function AddTaskModal(props) {
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={()=> props.onAddHandler()}>Close</button>
-            <button type="button" className="btn btn-primary" onClick={onAddTaskHandler}>Add Task</button>
+            {
+              props.editTemp ? 
+                <button type="button" className="btn btn-primary" onClick={onEditTaskHandler}>update</button>
+              : <button type="button" className="btn btn-primary" onClick={onAddTaskHandler}>Add Task</button>
+            }
           </div>
         </div>
       </div>
