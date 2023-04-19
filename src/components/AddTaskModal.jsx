@@ -32,7 +32,7 @@ function AddTaskModal(props) {
       date: date
     }
     for(let i in arr){
-      if(i === props.id){
+      if(+i === props.id){
         arr[i] = item
         console.log(props.tasks)
       }
